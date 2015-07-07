@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="movie_popup_scroll_fade_scrollBars">true</bool>
+    <bool name="movie_popup_scroll_draw_vertical_track">false</bool>
+</resources>

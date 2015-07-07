@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="movie_popup_scroll_fade_duration">1</integer>
+    <integer name="scrllbar_style">0x0</integer><!-- insideOverlay -->
+</resources>

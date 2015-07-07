@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Shopaholic</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">84da42782e94fab6b06893fac060c6a1</string>
+</resources>
