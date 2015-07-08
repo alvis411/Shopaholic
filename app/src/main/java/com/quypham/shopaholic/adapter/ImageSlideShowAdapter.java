@@ -1,6 +1,8 @@
 package com.quypham.shopaholic.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.quypham.shopaholic.R;
+import com.quypham.shopaholic.Shopaholic;
+import com.quypham.shopaholic.utils.BitmapDecode;
 
 /**
  * Created by Alvis on 7/5/2015.
@@ -26,17 +30,18 @@ public class ImageSlideShowAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.landing_pager_item, container, false);
-
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageLandingPage);
-        imageView.setImageResource(mImageResources[position]);
+        DecodeBitmapTask decodeTask = new DecodeBitmapTask(position);
+        decodeTask.execute();
+        imageView.setImageBitmap(imageBitmap);
 
         container.addView(itemView);
-        return imageView;
+        return itemView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((LinearLayout) object);
+        container.removeView((View) object);
     }
 
     @Override
@@ -46,6 +51,27 @@ public class ImageSlideShowAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((ImageView) object);
+        return view == object;
+    }
+
+    private class DecodeBitmapTask extends AsyncTask<Integer,Void,Bitmap>{
+        private Bitmap result;
+        private int position;
+        public DecodeBitmapTask(int position){
+            this.position = position;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Integer... params) {
+            result   = BitmapDecode.decodeBitmapFromResource(mContext.getResources(),mImageResources[position],
+                    Shopaholic.getShopaholic().getDisplayMetric().widthPixels,
+                    Shopaholic.getShopaholic().getDisplayMetric().heightPixels);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+        }
     }
 }

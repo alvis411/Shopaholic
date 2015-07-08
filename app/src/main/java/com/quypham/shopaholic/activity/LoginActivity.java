@@ -10,7 +10,7 @@ import com.quypham.shopaholic.R;
 import com.quypham.shopaholic.adapter.ImageSlideShowAdapter;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     private ImageSlideShowAdapter mSlideShowAdapter;
     private ViewPager mViewPager;
@@ -22,6 +22,7 @@ public class LoginActivity extends Activity {
         mSlideShowAdapter = new ImageSlideShowAdapter(this);
         mViewPager = (ViewPager) findViewById(R.id.landingPager);
         mViewPager.setAdapter(mSlideShowAdapter);
+        mViewPager.setCurrentItem(0);
     }
 
     @Override
