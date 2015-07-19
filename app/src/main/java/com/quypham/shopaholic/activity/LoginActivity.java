@@ -2,27 +2,33 @@ package com.quypham.shopaholic.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.FacebookSdk;
 import com.quypham.shopaholic.R;
 import com.quypham.shopaholic.adapter.ImageSlideShowAdapter;
+import com.quypham.shopaholic.runnable.ImageSlideShowRunnable;
 
 
 public class LoginActivity extends BaseActivity {
 
     private ImageSlideShowAdapter mSlideShowAdapter;
     private ViewPager mViewPager;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.landing_page);
         mSlideShowAdapter = new ImageSlideShowAdapter(this);
         mViewPager = (ViewPager) findViewById(R.id.landingPager);
         mViewPager.setAdapter(mSlideShowAdapter);
-        mViewPager.setCurrentItem(0);
+//        mHandler.postDelayed(new ImageSlideShowRunnable(mViewPager),5000);
+
     }
 
     @Override

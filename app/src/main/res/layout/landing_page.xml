@@ -8,4 +8,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_transparent"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/facebookLoginButton"
+            android:layout_width="@dimen/width_percent_25"
+            android:layout_height="@dimen/height_percent_7"
+            android:layout_marginTop="@dimen/height_percent_3"
+            android:paddingTop="@dimen/height_percent_1"
+            android:paddingBottom="@dimen/height_percent_1"
+            android:layout_centerHorizontal="true"
+            android:background="@color/blue_facebook"
+            android:text="LOGIN WITH FACEBOOK"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:textColor="@android:color/white"
+            />
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="@dimen/width_percent_25"
+            android:layout_height="@dimen/height_percent_7"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/height_percent_1"
+            android:paddingTop="@dimen/height_percent_1"
+            android:paddingBottom="@dimen/height_percent_1"
+            android:background="@android:color/white"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:layout_below="@id/facebookLoginButton"
+            android:text="LOG IN WITH EMAIL"/>
+        <TextView
+            android:id="@+id/logIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/height_percent_1"
+            android:layout_marginBottom="@dimen/height_percent_3"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:layout_below="@id/signUp"
+            android:text="Sign up with email"/>
+    </RelativeLayout>
+
 </RelativeLayout>

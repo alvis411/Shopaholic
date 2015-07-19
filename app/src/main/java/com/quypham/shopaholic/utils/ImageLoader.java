@@ -42,7 +42,7 @@ public class ImageLoader {
 
         @Override
         public void run() {
-            Bitmap decodedBitmap = BitmapDecode.decodeBitmapFromResource(mContext.getResources(), resourceId,
+            Bitmap decodedBitmap = BitmapUtilities.decodeBitmapFromResource(mContext.getResources(), resourceId,
                     Shopaholic.getShopaholic().getDisplayMetric().widthPixels,
                     Shopaholic.getShopaholic().getDisplayMetric().heightPixels);
             handler.post(new ImageDisplay(decodedBitmap));

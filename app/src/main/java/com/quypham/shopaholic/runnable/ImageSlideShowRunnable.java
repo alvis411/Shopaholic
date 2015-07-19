@@ -1,5 +1,6 @@
 package com.quypham.shopaholic.runnable;
 
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 
 /**
@@ -8,7 +9,8 @@ import android.support.v4.view.ViewPager;
 public class ImageSlideShowRunnable implements Runnable {
 
     private ViewPager mViewPager;
-    private final int IMAGE_DELAY = 3000;
+    private final int IMAGE_DELAY = 5000;
+    private Handler mHandler = new Handler();
 
     public ImageSlideShowRunnable(ViewPager pager){
         mViewPager = pager;
@@ -21,6 +23,7 @@ public class ImageSlideShowRunnable implements Runnable {
         }else{
             mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
         }
+        mHandler.postDelayed(this,IMAGE_DELAY);
 
     }
 }
