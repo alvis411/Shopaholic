@@ -2,45 +2,50 @@ package com.quypham.shopaholic.utils;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
+
 /**
- * Created by QuyPP1 on 7/9/2015.
+ * Created by Alvis on 7/25/2015.
  */
 public class MemoryCache {
-    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-    final int cacheSize = maxMemory / 8;
+    private LruCache<String,Bitmap> mCache;
+    private static MemoryCache instance;
+    private static final int MAX_MEMORY = (int) (Runtime.getRuntime().maxMemory()/1024);
+    private static final int MAX_CACHE_SIZE = MAX_MEMORY / 4;
 
-    private LruCache<String,Bitmap> memoryCache;
+    private MemoryCache(){
+        if(mCache == null){
+            mCache = new LruCache<String,Bitmap>(MAX_CACHE_SIZE){
+                @Override
+                protected int sizeOf(String key, Bitmap bitmap) {
+                    // The cache size will be measured in kilobytes rather than
+                    // number of items.
+                    return bitmap.getByteCount() / 1024;
+                }
+            };
+        }
+    };
 
-    public MemoryCache(){
-        memoryCache = new LruCache<String,Bitmap>(cacheSize){
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return bitmap.getByteCount() / 1024;
-            }
-        };
+    public static synchronized MemoryCache getInstance(){
+        if(instance == null){
+            instance = new MemoryCache();
+        }
+
+        return instance;
     }
 
-    public boolean putImage(String key,Bitmap bitmap){
-        if(memoryCache!=null && memoryCache.get(key)==null){
-            memoryCache.put(key,bitmap);
+    public boolean addBitmapToCache(String key,Bitmap bitmap){
+        if(mCache.get(key) == null){
+            mCache.put(key,bitmap);
             return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
-    public Bitmap getImage(String key){
-        if(memoryCache!=null){
-            return memoryCache.get(key);
+    public Bitmap getBitmapFromCache(String key){
+        if(key == null){
+            return null;
         }
-        return null;
-    }
-
-    public boolean clearCache(){
-        if(memoryCache!=null){
-            return true;
-        }
-        return false;
+        return mCache.get(key);
     }
 }

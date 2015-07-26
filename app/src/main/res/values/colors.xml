@@ -2,4 +2,5 @@
 <resources>
     <color name="black_transparent">#80000000</color>
     <color name="blue_facebook">#3b5998</color>
+    <color name="red_gmail">#dd4b39</color>
 </resources>

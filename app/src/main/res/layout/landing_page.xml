@@ -21,24 +21,26 @@
             android:layout_marginTop="@dimen/height_percent_3"
             android:paddingTop="@dimen/height_percent_1"
             android:paddingBottom="@dimen/height_percent_1"
+            android:drawableStart="@drawable/com_facebook_button_icon"
+            android:paddingLeft="@dimen/width_percent_1"
             android:layout_centerHorizontal="true"
             android:background="@color/blue_facebook"
-            android:text="LOGIN WITH FACEBOOK"
             android:textAppearance="@android:style/TextAppearance.Small"
             android:textColor="@android:color/white"
             />
         <Button
-            android:id="@+id/signUp"
+            android:id="@+id/googleLoginButton"
             android:layout_width="@dimen/width_percent_25"
             android:layout_height="@dimen/height_percent_7"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/height_percent_1"
             android:paddingTop="@dimen/height_percent_1"
             android:paddingBottom="@dimen/height_percent_1"
-            android:background="@android:color/white"
+            android:background="@color/red_gmail"
             android:textAppearance="@android:style/TextAppearance.Small"
             android:layout_below="@id/facebookLoginButton"
-            android:text="LOG IN WITH EMAIL"/>
+            android:textColor="@android:color/white"
+            android:text="LOG IN WITH GMAIL"/>
         <TextView
             android:id="@+id/logIn"
             android:layout_width="wrap_content"
@@ -48,7 +50,7 @@
             android:layout_marginTop="@dimen/height_percent_1"
             android:layout_marginBottom="@dimen/height_percent_3"
             android:textAppearance="@android:style/TextAppearance.Small"
-            android:layout_below="@id/signUp"
+            android:layout_below="@id/googleLoginButton"
             android:text="Sign up with email"/>
     </RelativeLayout>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 
 import com.quypham.shopaholic.R;
 import com.quypham.shopaholic.Shopaholic;
-import com.quypham.shopaholic.utils.BitmapUtilities;
+import com.quypham.shopaholic.utils.MemoryCache;
 import com.quypham.shopaholic.utils.ScalingUtilities;
 
 import java.lang.ref.WeakReference;
@@ -21,7 +22,7 @@ import java.lang.ref.WeakReference;
  */
 public class ImageSlideShowAdapter extends PagerAdapter {
 
-    private int[] mImageResources = {R.drawable.image, R.drawable.landing_page, R.drawable.landing_page3};
+    private int[] mImageResources = {R.drawable.landing_page6, R.drawable.landing_page, R.drawable.landing_page3};
     private Context mContext;
     private LayoutInflater mLayoutInflater;
 
@@ -34,7 +35,14 @@ public class ImageSlideShowAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.landing_pager_item, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageLandingPage);
-        setFitBitmap(imageView, mImageResources[position]);
+        final Bitmap cacheBitmap = MemoryCache.getInstance().getBitmapFromCache(String.valueOf(mImageResources[position]));
+        if(cacheBitmap!=null){
+            Log.d("Cache","Get bitmap from cache");
+            imageView.setImageBitmap(cacheBitmap);
+        }else{
+            Log.d("Cache","Get bitmap for first time");
+            setFitBitmap(imageView, mImageResources[position]);
+        }
         container.addView(itemView);
         return itemView;
     }
@@ -79,11 +87,14 @@ public class ImageSlideShowAdapter extends PagerAdapter {
             Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, mDstWidth,
                     mDstHeight, ScalingUtilities.ScalingLogic.FIT);
             unscaledBitmap.recycle();
+            //add bitmap to cache
+            MemoryCache.getInstance().addBitmapToCache(String.valueOf(resourceId),scaledBitmap);
             return scaledBitmap;
         }
         // Once complete, see if ImageView is still around and set bitmap.
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+
             if(imageViewWeakReference!=null && bitmap!=null){
                 final ImageView imageView = imageViewWeakReference.get();
                 if(imageView!=null){

@@ -3,5 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">84da42782e94fab6b06893fac060c6a1</string>
+    <string name="facebook_app_id">609319089207777</string>
+    <string name="login_facebook">LOGIN WITH FACEBOOK</string>
+    <string name="continue_facebook">CONTINUED</string>
+    <string name="login_gmail">LOGIN WITH GMAIL</string>
+    <string name="continue_gmail">CONTINUED</string>
 </resources>

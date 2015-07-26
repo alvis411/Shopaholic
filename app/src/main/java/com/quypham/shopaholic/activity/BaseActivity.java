@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
+import com.facebook.FacebookSdk;
 import com.quypham.shopaholic.Shopaholic;
 
 /**
